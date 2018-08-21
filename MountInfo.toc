@@ -1,8 +1,7 @@
-## Interface: 70000
-## Version: 2.1
+## Interface: 80000
+## Version: 3.0
 ## Title: MountInfo
 ## Notes: Where to get the mount?
-## Author: Yafis
-## Www: jetset.pro
+## Author: Haselnussbomber, Yafis (Original)
 
-Core.lua
+core.lua
