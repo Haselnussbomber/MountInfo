@@ -8,7 +8,7 @@ local function hook(self, unit, index, filter)
 	for _, mountID in ipairs(mountIDs) do
 		local _, spellID, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(mountID);
 		if (spellID == buffSpellID) then
-			local _, _, sourceText = C_MountJournal.GetMountInfoExtraByID(mountID);;
+			local _, _, sourceText = C_MountJournal.GetMountInfoExtraByID(mountID);
 			self:AddLine("\n|cffA3C3F0MountInfo|r", 1, 1, 1);
 			if (isCollected) then
 				self:AddLine(COLLECTED, RED_FONT_COLOR.r, RED_FONT_COLOR.g, RED_FONT_COLOR.b);
