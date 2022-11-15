@@ -15,7 +15,13 @@ local function hook(self, unit, index, filter)
 			else
 				self:AddLine(NOT_COLLECTED, GREEN_FONT_COLOR.r, GREEN_FONT_COLOR.g, GREEN_FONT_COLOR.b);
 			end
-			self:AddLine(sourceText, 1, 1, 1);
+
+			local _, _, sourceText = C_MountJournal.GetMountInfoExtraByID(mountID);
+			sourceText = strtrim(sourceText);
+			if (sourceText ~= nil and sourceText ~= "") then
+				self:AddLine(sourceText, 1, 1, 1);
+			end
+
 			self:Show();
 			break
 		end
