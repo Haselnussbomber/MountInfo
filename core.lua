@@ -17,7 +17,7 @@ local function hook(self, unit, index, filter)
 			end
 
 			local _, _, sourceText = C_MountJournal.GetMountInfoExtraByID(mountID);
-			sourceText = strtrim(sourceText);
+			sourceText = sourceText:gsub("|n$", ""):gsub("|n$", "");
 			if (sourceText ~= nil and sourceText ~= "") then
 				self:AddLine(sourceText, 1, 1, 1);
 			end
