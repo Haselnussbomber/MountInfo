@@ -1,13 +1,8 @@
-local function hook(self, unit, index, filter)
-	local buffSpellID = select(10, UnitAura(unit, index, filter));
-	if (not buffSpellID) then
-		return;
-	end
-
+local function processTooltip(self, spellID)
 	local mountIDs = C_MountJournal.GetMountIDs();
 	for _, mountID in ipairs(mountIDs) do
-		local _, spellID, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(mountID);
-		if (spellID == buffSpellID) then
+		local _, mountSpellID, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(mountID);
+		if (mountSpellID == spellID) then
 			self:AddLine("\n|cffA3C3F0MountInfo|r", 1, 1, 1);
 
 			if (isCollected) then
@@ -28,6 +23,25 @@ local function hook(self, unit, index, filter)
 	end
 end
 
+local function hook(self, unit, index, filter)
+	local buffSpellID = select(10, UnitAura(unit, index, filter));
+	if (not buffSpellID) then
+		return;
+	end
+	processTooltip(self, buffSpellID);
+end
+
 hooksecurefunc(GameTooltip, "SetUnitAura", hook);
 hooksecurefunc(GameTooltip, "SetUnitBuff", hook);
 hooksecurefunc(GameTooltip, "SetUnitDebuff", hook);
+
+local function hookInstance(self, unit, auraInstanceID)
+	local aura = C_UnitAuras.GetAuraDataByAuraInstanceID(unit, auraInstanceID);
+	if (not aura or not aura.spellId) then
+		return;
+	end
+	processTooltip(self, aura.spellId);
+end
+
+hooksecurefunc(GameTooltip, "SetUnitBuffByAuraInstanceID", hookInstance);
+hooksecurefunc(GameTooltip, "SetUnitDebuffByAuraInstanceID", hookInstance);
