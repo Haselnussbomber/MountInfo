@@ -1,7 +1,7 @@
-## Interface: 100002
-## Version: 3.0
+## Interface: 120000
+## Version: 4.0
 ## Title: MountInfo
 ## Notes: Where to get the mount?
-## Author: Haselnussbomber, Yafis (Original)
+## Author: Yafis, Haselnussbomber
 
 core.lua
